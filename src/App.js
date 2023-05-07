@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import logo from "./assets/images/logo.png";
-import moment from 'moment';
+import moment from "moment";
 
 const api = {
   key: "45320eb98dd32e71513cf76378fc81e7",
@@ -14,6 +14,18 @@ const App = () => {
   const [query, setQuery] = useState("");
   const [weather, setWeather] = useState({});
 
+  const search = (evt) => {
+    if (evt.key === "Enter") {
+      fetch(`${api.base}weather?q=${query}&units=metric&APPID=${api.key}`)
+        .then((res) => res.json())
+        .then((result) => {
+          setWeather(result);
+          setQuery("");
+          console.log(result);
+        });
+    }
+  };
+
   return (
     <div className="container">
       <Header className="alert alert-warning mt-4 p-5 rounded text-center" />
@@ -24,10 +36,13 @@ const App = () => {
       </div>
       <div className="row">
         <div className="search-panel col-sm-12 col-md-4 my-3">
-          <input
+        <input
             type="text"
             className="form-control search-input"
             placeholder="Search"
+            onChange={(e) => setQuery(e.target.value)}
+            value={query}
+            onKeyDown={search}
           />
         </div>
       </div>
