@@ -36,7 +36,7 @@ const App = () => {
       </div>
       <div className="row">
         <div className="search-panel col-sm-12 col-md-4 my-3">
-        <input
+          <input
             type="text"
             className="form-control search-input"
             placeholder="Search"
@@ -46,6 +46,17 @@ const App = () => {
           />
         </div>
       </div>
+      {typeof weather.main != "undefined" ? (
+        <div className="row">
+          {weather.name}, {weather.sys.country}
+          {Math.round(weather.main.temp)}°c
+          <div id="icon">
+            <img src={`${api.icon}/${weather.weather[0].icon}.png`} alt="" />
+          </div>
+        </div>
+      ) : (
+        ""
+      )}
     </div>
   );
 };
