@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import logo from "./assets/images/logo.png";
+import moment from 'moment';
 
 const api = {
   key: "45320eb98dd32e71513cf76378fc81e7",
@@ -16,6 +17,11 @@ const App = () => {
   return (
     <div className="container">
       <Header className="alert alert-warning mt-4 p-5 rounded text-center" />
+      <div className="row">
+        <div className="col-md-4 col-sm-12 my-3">
+          Today: {moment().format("dddd")} {moment().format("LL")}
+        </div>
+      </div>
       <div className="row">
         <div className="search-panel col-sm-12 col-md-4 my-3">
           <input
